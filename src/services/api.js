@@ -4,7 +4,7 @@
 const API_URL = "https://projetocmd.onrender.com"; // URL do backend em produção
 
 export async function registerUser({ name, email, password }) {
-  const response = await fetch(`${API_URL}/register`, {
+  const response = await fetch(`${API_URL}/users/`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
