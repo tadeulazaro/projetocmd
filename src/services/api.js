@@ -1,7 +1,7 @@
 // src/services/api.js
 // Serviço de integração com backend para autenticação e cadastro
 
-const API_URL = "http://localhost:3000"; // Altere para a URL do seu backend
+const API_URL = "https://projetocmd.onrender.com"; // URL do backend em produção
 
 export async function registerUser({ name, email, password }) {
   const response = await fetch(`${API_URL}/register`, {
