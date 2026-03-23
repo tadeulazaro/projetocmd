@@ -19,15 +19,23 @@ export async function registerUser({ name, email, password }) {
 }
 
 export async function loginUser({ email, password }) {
-  const response = await fetch(`${API_URL}/login`, {
+  const params = new URLSearchParams();
+  params.append("username", email);
+  params.append("password", password);
+  const response = await fetch(`${API_URL}/token`, {
     method: "POST",
     headers: {
-      "Content-Type": "application/json",
+      "Content-Type": "application/x-www-form-urlencoded",
     },
-    body: JSON.stringify({ email, password }),
+    body: params,
   });
   if (!response.ok) {
-    const error = await response.json();
+    let error;
+    try {
+      error = await response.json();
+    } catch {
+      error = { message: "Erro ao fazer login" };
+    }
     throw new Error(error.message || "Erro ao fazer login");
   }
   return response.json();
