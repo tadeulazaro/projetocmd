@@ -1,0 +1,34 @@
+// src/services/api.js
+// Serviço de integração com backend para autenticação e cadastro
+
+const API_URL = "http://localhost:3000"; // Altere para a URL do seu backend
+
+export async function registerUser({ name, email, password }) {
+  const response = await fetch(`${API_URL}/register`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ name, email, password }),
+  });
+  if (!response.ok) {
+    const error = await response.json();
+    throw new Error(error.message || "Erro ao cadastrar usuário");
+  }
+  return response.json();
+}
+
+export async function loginUser({ email, password }) {
+  const response = await fetch(`${API_URL}/login`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ email, password }),
+  });
+  if (!response.ok) {
+    const error = await response.json();
+    throw new Error(error.message || "Erro ao fazer login");
+  }
+  return response.json();
+}
